@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.24;
 
-import {EntryPoint, UserOperation} from "@account-abstraction/contracts/core/EntryPoint.sol";
-import {IAccount} from "@account-abstraction/contracts/interfaces/IAccount.sol";
+import {EntryPoint} from "@account-abstraction/contracts/core/EntryPoint.sol";
+import {IAccount, UserOperation} from "@account-abstraction/contracts/interfaces/IAccount.sol";
 
 contract Account is IAccount {
     uint256 public count;
@@ -22,5 +22,12 @@ contract Account is IAccount {
 
     function execute() external {
         count++;
+    }
+}
+
+contract AccountFactory {
+    function createAccount(address owner) external returns (address) {
+        Account account = new Account(owner);
+        return address(account);
     }
 }
