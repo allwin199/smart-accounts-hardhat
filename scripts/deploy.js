@@ -9,11 +9,11 @@ async function main() {
 
     console.log(`Account Factory Deployed to ${deployAccountFactory.target}`);
 
-    const deployEntryPoint = await hre.ethers.deployContract("EntryPoint");
+    // const deployEntryPoint = await hre.ethers.deployContract("EntryPoint");
 
-    await deployEntryPoint.waitForDeployment();
+    // await deployEntryPoint.waitForDeployment();
 
-    console.log(`Entry Point Deployed to ${deployEntryPoint.target}`);
+    // console.log(`Entry Point Deployed to ${deployEntryPoint.target}`);
 
     const payMaster = await hre.ethers.deployContract("Paymaster");
 
