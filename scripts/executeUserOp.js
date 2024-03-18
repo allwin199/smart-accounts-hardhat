@@ -41,14 +41,17 @@ async function main() {
         nonce: await entryPoint.getNonce(sender, 0),
         initCode,
         callData,
-        callGasLimit: 200_000,
-        verificationGasLimit: 200_000,
-        preVerificationGas: 50_000,
+        callGasLimit: 400_000,
+        verificationGasLimit: 500_000,
+        preVerificationGas: 100_000,
         maxFeePerGas: hre.ethers.parseUnits("10", "gwei"),
         maxPriorityFeePerGas: hre.ethers.parseUnits("5", "gwei"),
         paymasterAndData: PAY_MASTER_ADDRESS,
         signature: "0x",
     };
+
+    const userOpHash = await entryPoint.getUserOpHash(userOp);
+    userOp.signature = signer0.signMessage(hre.ethers.getBytes(userOpHash));
 
     const tx = await entryPoint.handleOps([userOp], address0);
     const receipt = await tx.wait();
